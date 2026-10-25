@@ -104,8 +104,12 @@ async function searchWeb(query, timeoutMs) {
     const answerBox = data.answerBox?.answer || data.answerBox?.snippet;
     if (answerBox) items.unshift(`Краткий ответ поисковика: ${String(answerBox).slice(0, 350)}`);
     return items.length ? items.join("\n") : "";
-  } catch (error) {
-    console.warn("Serper request did not finish in time; continuing without search.");
+    } catch (error) {
+    console.warn(
+      "Serper search error:",
+      error?.name || "UnknownError",
+      error?.message || "No error message"
+    );
     return "";
   }
 }
